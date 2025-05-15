@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/list_fragment">
+
+    <fragment
+        android:id="@+id/list_fragment"
+        android:name="com.antmar.pixflickrappviews.presentation.fragments.GridListFragment"
+        android:label="list_fragment">
+        <action
+            android:id="@+id/action_to_picture_view"
+            app:destination="@id/picture_view_fragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/picture_view_fragment"
+        android:name="com.antmar.pixflickrappviews.presentation.fragments.FullImageFragment"
+        android:label="picture_view_fragment"/>
+
+</navigation>
