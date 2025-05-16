@@ -8,8 +8,8 @@ class GetApiListAndInsertUseCase @Inject constructor(
     private val flickrRepository: FlickrRepository,
     private val roomRepository: RoomRepository
 ) {
-    suspend operator fun invoke() {
-        val result = flickrRepository.search()
+    suspend operator fun invoke(page : Int) {
+        val result = flickrRepository.search(page)
         if (result.isSuccess) {
             roomRepository.insertAll(result.getOrNull() ?: emptyList())
         }

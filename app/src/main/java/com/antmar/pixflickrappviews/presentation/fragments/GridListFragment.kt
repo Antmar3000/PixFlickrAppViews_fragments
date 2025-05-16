@@ -12,6 +12,7 @@ import androidx.lifecycle.flowWithLifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.antmar.pixflickrappviews.R
 import com.antmar.pixflickrappviews.data.entity.Picture
 import com.antmar.pixflickrappviews.databinding.FragmentGridListBinding
@@ -46,6 +47,9 @@ class GridListFragment() : BaseFragment<FragmentGridListBinding>() {
         super.onViewCreated(view, savedInstanceState)
 
         setRecyclerView()
+        binding.button.setOnClickListener {
+            viewModel.clearDB()
+        }
 
     }
 
@@ -53,6 +57,19 @@ class GridListFragment() : BaseFragment<FragmentGridListBinding>() {
         binding.recyclerView.apply {
             layoutManager = GridLayoutManager(activity, 3)
             adapter = this@GridListFragment.adapter
+            addOnScrollListener(object : RecyclerView.OnScrollListener() {
+                override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
+                    super.onScrolled(recyclerView, dx, dy)
+                    val layoutManager = this@apply.layoutManager as GridLayoutManager
+                    val totalItemCount = layoutManager.itemCount
+                    val lastVisibleItemPosition = layoutManager.findLastVisibleItemPosition()
+
+                    if (totalItemCount <= lastVisibleItemPosition + 5) {
+                        viewModel.currentPage++
+                        viewModel.getApiListAndInsert(viewModel.currentPage)
+                    }
+                }
+            })
         }
 
         viewModel.pictureListState.flowWithLifecycle(

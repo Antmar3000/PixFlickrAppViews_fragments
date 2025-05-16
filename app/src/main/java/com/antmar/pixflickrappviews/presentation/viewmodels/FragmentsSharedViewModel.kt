@@ -4,10 +4,12 @@ import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.antmar.pixflickrappviews.data.entity.Picture
+import com.antmar.screen_gridlist.data.flickr.dto.PhotoDto
 import com.antmar.screen_gridlist.domain.usecases.ClearDBUseCase
 import com.antmar.screen_gridlist.domain.usecases.GetApiListAndInsertUseCase
 import com.antmar.screen_gridlist.domain.usecases.GetDBListUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
@@ -26,8 +28,10 @@ class FragmentsSharedViewModel @Inject constructor(
     private val _currentPictureUrl = MutableStateFlow<String>("")
     val currentPictureUrl get() = _currentPictureUrl.asStateFlow()
 
+    var currentPage = pictureListState.value.size / 30
+
     init {
-        getApiListAndInsert()
+        getApiListAndInsert(currentPage)
         getDBList()
     }
 
@@ -36,9 +40,9 @@ class FragmentsSharedViewModel @Inject constructor(
         clearDB()
     }
 
-    private fun getApiListAndInsert() {
+    fun getApiListAndInsert(page : Int) {
         viewModelScope.launch {
-            getApiAndInsert()
+            getApiAndInsert(page)
         }
     }
 
@@ -50,7 +54,7 @@ class FragmentsSharedViewModel @Inject constructor(
         }
     }
 
-    private fun clearDB () {
+    fun clearDB () {
         viewModelScope.launch {
             clearDBUseCase()
         }
@@ -61,4 +65,5 @@ class FragmentsSharedViewModel @Inject constructor(
             url.replace("_m.jpg", "_b.jpg")
         } else url
     }
+
 }

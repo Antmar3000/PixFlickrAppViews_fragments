@@ -10,7 +10,7 @@ class FlickrRepository @Inject constructor(
     private val flickrApi: FlickrApi
 ) {
 
-    suspend fun search(): Result<List<PictureDbo>> = runCatching {
-        return flickrApi.search().toDBOResult("m")
+    suspend fun search(page : Int): Result<List<PictureDbo>> = runCatching {
+        return flickrApi.search(page = page).toDBOResult("m")
     }
 }

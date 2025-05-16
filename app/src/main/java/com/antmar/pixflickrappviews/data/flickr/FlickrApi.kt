@@ -13,8 +13,8 @@ interface FlickrApi {
     @GET(SEARCH_URL)
     suspend fun search(
         @Query("text") text: String = "cats",
-        @Query("page") page: Int = 1,
-        @Query("per_page") count: Int = 50
+        @Query("page") page: Int,
+        @Query("per_page") count: Int = 5
     ): FlickrResult
 
     companion object {
