@@ -26,7 +26,7 @@ import kotlinx.coroutines.flow.onEach
 @AndroidEntryPoint
 class GridListFragment() : BaseFragment<FragmentGridListBinding>() {
 
-    private val viewModel: FragmentsSharedViewModel by viewModels()
+    private val viewModel: FragmentsSharedViewModel by activityViewModels()
     private val navController by lazy { findNavController() }
 
     private val listener = object : ClickListener {

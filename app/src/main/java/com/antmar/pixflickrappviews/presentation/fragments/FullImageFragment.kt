@@ -1,6 +1,8 @@
 package com.antmar.pixflickrappviews.presentation.fragments
 
+import android.net.Uri
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -23,7 +25,7 @@ import kotlinx.coroutines.launch
 @AndroidEntryPoint
 class FullImageFragment : BaseFragment<FragmentFullImageBinding>() {
 
-    private val viewModel : FragmentsSharedViewModel by viewModels()
+    private val viewModel : FragmentsSharedViewModel by activityViewModels()
     private val navController by lazy { findNavController() }
 
     override val bindingInflater: (LayoutInflater, ViewGroup?, Boolean) -> FragmentFullImageBinding
@@ -46,7 +48,8 @@ class FullImageFragment : BaseFragment<FragmentFullImageBinding>() {
     }
 
     private fun loadImage(url : String) {
-        binding.pictureView.load(url)
+        binding.pictureView.load(Uri.parse(url))
+        Log.d("myLog", url)
     }
 
 }

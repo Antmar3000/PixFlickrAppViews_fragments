@@ -1,5 +1,6 @@
 package com.antmar.pixflickrappviews.presentation.adapters
 
+import android.net.Uri
 import androidx.recyclerview.widget.RecyclerView
 import coil.load
 import com.antmar.pixflickrappviews.data.entity.Picture
@@ -12,7 +13,7 @@ class GridListViewHolder (
 ) : RecyclerView.ViewHolder (binding.root) {
 
     fun bind(picture: Picture) = with(binding) {
-        pictureImage.load(picture.url) {
+        pictureImage.load(Uri.parse(picture.url)) {
             crossfade(true)
             placeholder(android.R.drawable.ic_menu_search)
         }
