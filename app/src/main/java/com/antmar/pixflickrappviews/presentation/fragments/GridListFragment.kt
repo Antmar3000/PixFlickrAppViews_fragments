@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.activityViewModels
+import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.flowWithLifecycle
 import androidx.lifecycle.lifecycleScope
@@ -25,7 +26,7 @@ import kotlinx.coroutines.flow.onEach
 @AndroidEntryPoint
 class GridListFragment() : BaseFragment<FragmentGridListBinding>() {
 
-    private val viewModel: FragmentsSharedViewModel by activityViewModels()
+    private val viewModel: FragmentsSharedViewModel by viewModels()
     private val navController by lazy { findNavController() }
 
     private val listener = object : ClickListener {

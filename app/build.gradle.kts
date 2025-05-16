@@ -8,7 +8,7 @@ plugins {
 
 android {
     namespace = "com.antmar.pixflickrappviews"
-    compileSdk = 34
+    compileSdk = 35
 
     defaultConfig {
         applicationId = "com.antmar.pixflickrappviews"
@@ -74,7 +74,7 @@ dependencies {
     ksp(libs.androidx.room.compiler)
 
     implementation(libs.hilt.android)
-    implementation(libs.hilt.viewmodel)
+    implementation(libs.hilt.nav.fragment)
     ksp(libs.hilt.compiler)
 
     implementation(libs.coil)

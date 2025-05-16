@@ -7,15 +7,14 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.viewbinding.ViewBinding
 
-abstract class BaseFragment <binding : ViewBinding> : Fragment() {
+abstract class BaseFragment<binding : ViewBinding> : Fragment() {
 
-    private var _binding : ViewBinding? = null
-    abstract val bindingInflater : (LayoutInflater, ViewGroup?, Boolean) -> binding
+    private var _binding: ViewBinding? = null
+    abstract val bindingInflater: (LayoutInflater, ViewGroup?, Boolean) -> binding
 
 
     @Suppress("UNCHECKED_CAST")
-    protected val binding : binding
-        get() = _binding as binding
+    protected val binding: binding get() = _binding as binding
 
     override fun onCreateView(
         inflater: LayoutInflater,

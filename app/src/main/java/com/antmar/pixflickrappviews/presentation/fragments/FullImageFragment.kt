@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.activityViewModels
+import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
@@ -22,7 +23,7 @@ import kotlinx.coroutines.launch
 @AndroidEntryPoint
 class FullImageFragment : BaseFragment<FragmentFullImageBinding>() {
 
-    private val viewModel : FragmentsSharedViewModel by activityViewModels()
+    private val viewModel : FragmentsSharedViewModel by viewModels()
     private val navController by lazy { findNavController() }
 
     override val bindingInflater: (LayoutInflater, ViewGroup?, Boolean) -> FragmentFullImageBinding
