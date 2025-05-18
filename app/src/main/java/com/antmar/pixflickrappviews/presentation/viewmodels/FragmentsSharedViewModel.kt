@@ -57,6 +57,7 @@ class FragmentsSharedViewModel @Inject constructor(
     fun clearDB () {
         viewModelScope.launch {
             clearDBUseCase()
+            currentPage = 1
         }
     }
 

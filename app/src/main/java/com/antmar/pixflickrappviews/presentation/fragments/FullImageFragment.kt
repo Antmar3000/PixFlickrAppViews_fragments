@@ -25,7 +25,7 @@ import kotlinx.coroutines.launch
 @AndroidEntryPoint
 class FullImageFragment : BaseFragment<FragmentFullImageBinding>() {
 
-    private val viewModel : FragmentsSharedViewModel by activityViewModels()
+    private val viewModel: FragmentsSharedViewModel by activityViewModels()
     private val navController by lazy { findNavController() }
 
     override val bindingInflater: (LayoutInflater, ViewGroup?, Boolean) -> FragmentFullImageBinding
@@ -47,9 +47,19 @@ class FullImageFragment : BaseFragment<FragmentFullImageBinding>() {
         }
     }
 
-    private fun loadImage(url : String) {
-        binding.pictureView.load(Uri.parse(url))
-        Log.d("myLog", url)
+    private fun loadImage(url: String) {
+        binding.pictureView.load(Uri.parse(url)) {
+            listener(
+                onStart = { binding.progressBarFullImage.visibility = View.VISIBLE },
+                onSuccess = { _, _ ->
+                    binding.progressBarFullImage.visibility = View.INVISIBLE
+                    binding.pictureView.centerImage()
+                },
+                onError = { _, _ ->
+                    binding.progressBarFullImage.visibility = View.INVISIBLE
+                }
+            )
+        }
     }
 
 }

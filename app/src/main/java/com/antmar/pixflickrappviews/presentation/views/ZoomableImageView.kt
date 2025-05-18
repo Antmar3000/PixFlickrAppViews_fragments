@@ -95,4 +95,27 @@ class ZoomableImageView @JvmOverloads constructor(
             true
         }
     }
+
+    fun centerImage() {
+        drawable?.let { drawable ->
+            val viewWidth = width.toFloat()
+            val viewHeight = height.toFloat()
+
+            val drawableWidth = drawable.intrinsicWidth.toFloat()
+            val drawableHeight = drawable.intrinsicHeight.toFloat()
+
+            val scale = minOf(viewWidth / drawableWidth, viewHeight / drawableHeight)
+
+            val dx = (viewWidth - drawableWidth * scale) / 2f
+            val dy = (viewHeight - drawableHeight * scale) / 2f
+
+            matrix.reset()
+            matrix.postScale(scale, scale)
+            matrix.postTranslate(dx, dy)
+
+            imageMatrix = matrix
+            scaleFactor = scale
+            isZoomed = false
+        }
+    }
 }
